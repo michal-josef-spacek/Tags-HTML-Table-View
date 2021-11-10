@@ -1,0 +1,135 @@
+NAME
+    Tags::HTML::Table::View - Tags helper for table view.
+
+SYNOPSIS
+     use Tags::HTML::Table::View;
+
+     my $obj = Tags::HTML::Table::View->new(%params);
+     $obj->process;
+     $obj->process_css;
+
+METHODS
+  "new"
+     my $obj = Tags::HTML::Table::View->new(%params);
+
+    Constructor.
+
+    Returns instance of object.
+
+    *       "css"
+
+            'CSS::Struct::Output' object for process_css processing.
+
+            Default value is undef.
+
+    *       "language"
+
+            Language in ISO 639-3 code.
+
+            Default value is 'eng'.
+
+    *       "tags"
+
+            'Tags::Output' object.
+
+            Default value is undef.
+
+    *       "text"
+
+            Hash reference with keys defined language in ISO 639-3 code and
+            value with hash reference with texts.
+
+            Required keys are 'login', 'password_label', 'username_label'
+            and 'submit'.
+
+            Default value is:
+
+             {
+                    'eng' => {
+                            'login' => 'Login',
+                            'password_label' => 'Password',
+                            'username_label' => 'User name',
+                            'submit' => 'Login',
+                    },
+             }
+
+  "process"
+     $obj->process($percent_value);
+
+    Process Tags structure for gradient.
+
+    Returns undef.
+
+  "process_css"
+     $obj->process_css;
+
+    Process CSS::Struct structure for output.
+
+    Returns undef.
+
+ERRORS
+     new():
+             From Class::Utils::set_params():
+                     Unknown parameter '%s'.
+             From Tags::HTML::new():
+                     Parameter 'css' must be a 'CSS::Struct::Output::*' class.
+                     Parameter 'tags' must be a 'Tags::Output::*' class.
+
+     process():
+             From Tags::HTML::process():
+                     Parameter 'tags' isn't defined.
+
+     process_css():
+             From Tags::HTML::process_css():
+                     Parameter 'css' isn't defined.
+
+EXAMPLE
+     use strict;
+     use warnings;
+
+     use CSS::Struct::Output::Indent;
+     use Tags::HTML::Table::View;
+     use Tags::Output::Indent;
+
+     # Object.
+     my $css = CSS::Struct::Output::Indent->new;
+     my $tags = Tags::Output::Indent->new;
+     my $obj = Tags::HTML::Table::View->new(
+             'css' => $css,
+             'tags' => $tags,
+     );
+
+     # Process login button.
+     $obj->process_css;
+     $tags->put(['b', 'body']);
+     $obj->process;
+     $tags->put(['e', 'body']);
+
+     # Print out.
+     print "CSS\n";
+     print $css->flush."\n\n";
+     print "HTML\n";
+     print $tags->flush."\n";
+
+     # Output:
+     # TODO
+
+DEPENDENCIES
+    Class::Utils, Error::Pure, List::MoreUtils, Tags::HTML.
+
+REPOSITORY
+    <https://github.com/michal-josef-spacek/Tags-HTML-Table-View>
+
+AUTHOR
+    Michal Josef Špaček <mailto:skim@cpan.org>
+
+    <http://skim.cz>
+
+LICENSE AND COPYRIGHT
+    © Michal Josef Špaček 2021
+
+    BSD 2-Clause License
+
+VERSION
+    0.01
+
