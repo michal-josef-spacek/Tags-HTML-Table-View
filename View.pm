@@ -204,10 +204,17 @@ Returns undef.
          'tags' => $tags,
  );
 
+ # Table data.
+ my $table_data_ar = [
+         ['Country', 'Capital'],
+         ['Czech Republic', 'Prague'],
+         ['Russia', 'Moscow'],
+ ];
+
  # Process login button.
  $obj->process_css;
  $tags->put(['b', 'body']);
- $obj->process;
+ $obj->process($table_data_ar);
  $tags->put(['e', 'body']);
 
  # Print out.
@@ -217,7 +224,40 @@ Returns undef.
  print $tags->flush."\n";
 
  # Output:
- # TODO
+ # CSS
+ # .table table, .table th, .table td {
+ #         border: 1px solid black;
+ # }
+ # 
+ # HTML
+ # <body>
+ #   <table class="table">
+ #     <tr>
+ #       <th>
+ #         Country
+ #       </th>
+ #       <th>
+ #         Capital
+ #       </th>
+ #     </tr>
+ #     <tr>
+ #       <td>
+ #         Czech Republic
+ #       </td>
+ #       <td>
+ #         Prague
+ #       </td>
+ #     </tr>
+ #     <tr>
+ #       <td>
+ #         Russia
+ #       </td>
+ #       <td>
+ #         Moscow
+ #       </td>
+ #     </tr>
+ #   </table>
+ # </body>
 
 =head1 DEPENDENCIES
 

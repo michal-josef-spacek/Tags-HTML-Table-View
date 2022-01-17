@@ -22,6 +22,7 @@ meta-spec:
 name: Tags-HTML-Table-View
 no_index:
   directory:
+    - examples
     - inc
     - t
     - xt
