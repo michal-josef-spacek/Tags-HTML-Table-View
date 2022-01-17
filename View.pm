@@ -16,7 +16,7 @@ sub new {
 
 	# Create object.
 	my ($object_params_ar, $other_params_ar) = split_params(
-		['css_table', 'header', 'lang', 'link', 'title', 'text'], @params);
+		['css_table', 'header'], @params);
 	my $self = $class->SUPER::new(@{$other_params_ar});
 
 	# Main CSS class.
@@ -25,31 +25,8 @@ sub new {
 	# Header is in first line.
 	$self->{'header'} = 1;
 
-	# Language.
-	$self->{'lang'} = 'eng';
-
-	# Language texts.
-	$self->{'text'} = {
-		'eng' => {
-#			'submit' => 'Login',
-		},
-	};
-
 	# Process params.
 	set_params($self, @{$object_params_ar});
-
-	# TODO Check lang.
-
-	# Check text for lang
-	if (! defined $self->{'text'}) {
-		err "Parameter 'text' is required.";
-	}
-	if (ref $self->{'text'} ne 'HASH') {
-		err "Parameter 'text' must be a hash with language texts.";
-	}
-	if (! exists $self->{'text'}->{$self->{'lang'}}) {
-		err "Texts for language '$self->{'lang'}' doesn't exist.";
-	}
 
 	# Object.
 	return $self;
@@ -118,16 +95,6 @@ sub _process_css {
 	return;
 }
 
-sub _text {
-	my ($self, $key) = @_;
-
-	if (! exists $self->{'text'}->{$self->{'lang'}}->{$key}) {
-		err "Text for lang '$self->{'lang'}' and key '$key' doesn't exist.";
-	}
-
-	return $self->{'text'}->{$self->{'lang'}}->{$key};
-}
-
 
 1;
 
@@ -167,35 +134,14 @@ Returns instance of object.
 
 Default value is undef.
 
-=item * C<language>
 
-Language in ISO 639-3 code.
 
-Default value is 'eng'.
 
 =item * C<tags>
 
 'Tags::Output' object.
 
 Default value is undef.
-
-=item * C<text>
-
-Hash reference with keys defined language in ISO 639-3 code and value with hash
-reference with texts.
-
-Required keys are 'login', 'password_label', 'username_label' and 'submit'.
-
-Default value is:
-
- {
- 	'eng' => {
- 		'login' => 'Login',
- 		'password_label' => 'Password',
- 		'username_label' => 'User name',
- 		'submit' => 'Login',
- 	},
- }
 
 =back
 

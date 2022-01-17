@@ -22,36 +22,14 @@ METHODS
 
             Default value is undef.
 
-    *       "language"
 
-            Language in ISO 639-3 code.
 
-            Default value is 'eng'.
 
     *       "tags"
 
             'Tags::Output' object.
 
             Default value is undef.
-
-    *       "text"
-
-            Hash reference with keys defined language in ISO 639-3 code and
-            value with hash reference with texts.
-
-            Required keys are 'login', 'password_label', 'username_label'
-            and 'submit'.
-
-            Default value is:
-
-             {
-                    'eng' => {
-                            'login' => 'Login',
-                            'password_label' => 'Password',
-                            'username_label' => 'User name',
-                            'submit' => 'Login',
-                    },
-             }
 
   "process"
      $obj->process($percent_value);
