@@ -134,8 +134,17 @@ Returns instance of object.
 
 Default value is undef.
 
+=item * C<css_table>
 
+CSS class for table.
 
+Default value is 'table'.
+
+=item * C<header>
+
+Boolean flag, that means that header is in first line.
+
+Default value is 1.
 
 =item * C<tags>
 

@@ -22,8 +22,17 @@ METHODS
 
             Default value is undef.
 
+    *       "css_table"
 
+            CSS class for table.
 
+            Default value is 'table'.
+
+    *       "header"
+
+            Boolean flag, that means that header is in first line.
+
+            Default value is 1.
 
     *       "tags"
 
