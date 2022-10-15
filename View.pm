@@ -149,7 +149,7 @@ Tags::HTML::Table::View - Tags helper for table view.
  use Tags::HTML::Table::View;
 
  my $obj = Tags::HTML::Table::View->new(%params);
- $obj->process;
+ $obj->process($data_ar);
  $obj->process_css;
 
 =head1 METHODS
@@ -192,9 +192,9 @@ Default value is undef.
 
 =head2 C<process>
 
- $obj->process($percent_value);
+ $obj->process($data_ar);
 
-Process Tags structure for gradient.
+Process Tags structure for table view.
 
 Returns undef.
 
@@ -316,7 +316,7 @@ L<http://skim.cz>
 
 =head1 LICENSE AND COPYRIGHT
 
-© Michal Josef Špaček 2021-2022
+© 2021-2022 Michal Josef Špaček
 
 BSD 2-Clause License
 

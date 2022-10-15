@@ -5,7 +5,7 @@ SYNOPSIS
      use Tags::HTML::Table::View;
 
      my $obj = Tags::HTML::Table::View->new(%params);
-     $obj->process;
+     $obj->process($data_ar);
      $obj->process_css;
 
 METHODS
@@ -41,9 +41,9 @@ METHODS
             Default value is undef.
 
   "process"
-     $obj->process($percent_value);
+     $obj->process($data_ar);
 
-    Process Tags structure for gradient.
+    Process Tags structure for table view.
 
     Returns undef.
 
@@ -65,6 +65,7 @@ ERRORS
      process():
              From Tags::HTML::process():
                      Parameter 'tags' isn't defined.
+             Bad value object.
 
      process_css():
              From Tags::HTML::process_css():
@@ -142,7 +143,7 @@ EXAMPLE
      # </body>
 
 DEPENDENCIES
-    Class::Utils, Error::Pure, List::MoreUtils, Tags::HTML.
+    Class::Utils, Error::Pure, List::MoreUtils, Scalar::Util, Tags::HTML.
 
 REPOSITORY
     <https://github.com/michal-josef-spacek/Tags-HTML-Table-View>
@@ -153,7 +154,7 @@ AUTHOR
     <http://skim.cz>
 
 LICENSE AND COPYRIGHT
-    © Michal Josef Špaček 2021-2022
+    © 2021-2022 Michal Josef Špaček
 
     BSD 2-Clause License
 
