@@ -7,6 +7,7 @@ use warnings;
 use Class::Utils qw(set_params split_params);
 use Error::Pure qw(err);
 use List::MoreUtils qw(none);
+use Scalar::Util qw(blessed);
 
 our $VERSION = 0.01;
 
@@ -64,7 +65,17 @@ sub _process {
 		foreach my $value (@{$row_ar}) {
 			$self->{'tags'}->put(
 				['b', 'td'],
-				['d', $value],
+			);
+			if (ref $value eq '') {
+				$self->{'tags'}->put(
+					['d', $value],
+				);
+			} elsif (blessed($value) && $value->isa('Data::HTML::A')) {
+				$self->_tags_a($value);
+			} else {
+				err 'Bad value object.';
+			}
+			$self->{'tags'}->put(
 				['e', 'td'],
 			);
 		}
@@ -95,6 +106,31 @@ sub _process_css {
 	return;
 }
 
+sub _tags_a {
+	my ($self, $value) = @_;
+
+	$self->{'tags'}->put(
+		['b', 'a'],
+		defined $value->css_class ? (
+			['a', 'class', $value->css_class],
+		) : (),
+		defined $value->url ? (
+			['a', 'href', $value->url],
+		) : (),
+	);
+	if ($value->data_type eq 'plain') {
+		$self->{'tags'}->put(
+			['d', $value->data],
+		);
+	} elsif ($value->data_type eq 'tags') {
+		$self->{'tags'}->put($value->data);
+	}
+	$self->{'tags'}->put(
+		['e', 'a'],
+	);
+
+	return;
+}
 
 1;
 
@@ -182,6 +218,7 @@ Returns undef.
  process():
          From Tags::HTML::process():
                  Parameter 'tags' isn't defined.
+         Bad value object.
 
  process_css():
          From Tags::HTML::process_css():
@@ -264,6 +301,7 @@ Returns undef.
 L<Class::Utils>,
 L<Error::Pure>,
 L<List::MoreUtils>,
+L<Scalar::Util>,
 L<Tags::HTML>.
 
 =head1 REPOSITORY
