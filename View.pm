@@ -96,10 +96,21 @@ sub _process_css {
 	my $self = shift;
 
 	$self->{'css'}->put(
-		['s', '.'.$self->{'css_table'}.' table'],
-		['s', '.'.$self->{'css_table'}.' th'],
-		['s', '.'.$self->{'css_table'}.' td'],
-		['d', 'border', '1px solid black'],
+		['s', 'table'],
+		['s', 'td'],
+		['s', 'th'],
+		['d', 'border', '1px solid #ddd'],
+		['d', 'text-align', 'left'],
+		['e'],
+
+		['s', 'table'],
+		['d', 'border-collapse', 'collapse'],
+		['d', 'width', '100%'],
+		['e'],
+
+		['s', 'th'],
+		['s', 'td'],
+		['d', 'padding', '15px'],
 		['e'],
 	);
 

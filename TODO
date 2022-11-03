@@ -1,9 +1,11 @@
 TODO
 ====
-1. Implement pretty CSS
 2. Second example with tags data (Data::HTML::A).
 3. Tests.
-4.
+4. Add CSS class variable to CSS
+5.
 
 Applied
 =======
+1. Implement pretty CSS
+OK [20221103] skim
