@@ -70,6 +70,8 @@ sub _process {
 				$self->{'tags'}->put(
 					['d', $value],
 				);
+			} elsif (ref $value eq 'ARRAY') {
+				$self->{'tags'}->put(@{$value});
 			} elsif (blessed($value) && $value->isa('Data::HTML::A')) {
 				$self->_tags_a($value);
 			} else {
