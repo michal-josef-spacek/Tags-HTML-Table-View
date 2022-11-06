@@ -35,13 +35,14 @@ sub new {
 
 # Process 'Tags'.
 sub _process {
-	my ($self, $data_ar) = @_;
+	my ($self, $data_ar, $no_data_value) = @_;
 
 	# Main content.
 	$self->{'tags'}->put(
 		['b', 'table'],
 		['a', 'class', $self->{'css_table'}],
 	);
+	my $columns_count = 0;
 	if ($self->{'header'}) {
 		$self->{'tags'}->put(
 			['b', 'tr'],
@@ -53,10 +54,13 @@ sub _process {
 				['d', $value],
 				['e', 'th'],
 			);
+			$columns_count++;
 		}
 		$self->{'tags'}->put(
 			['e', 'tr'],
 		);
+	} else {
+		$columns_count++;
 	}
 	foreach my $row_ar (@{$data_ar}) {
 		$self->{'tags'}->put(
@@ -66,22 +70,26 @@ sub _process {
 			$self->{'tags'}->put(
 				['b', 'td'],
 			);
-			if (ref $value eq '') {
-				$self->{'tags'}->put(
-					['d', $value],
-				);
-			} elsif (ref $value eq 'ARRAY') {
-				$self->{'tags'}->put(@{$value});
-			} elsif (blessed($value) && $value->isa('Data::HTML::A')) {
-				$self->_tags_a($value);
-			} else {
-				err 'Bad value object.';
-			}
+			$self->_value($value);
 			$self->{'tags'}->put(
 				['e', 'td'],
 			);
 		}
 		$self->{'tags'}->put(
+			['e', 'tr'],
+		);
+	}
+
+	# No data row.
+	if (! @{$data_ar} && defined $no_data_value) {
+		$self->{'tags'}->put(
+			['b', 'tr'],
+			['b', 'td'],
+			['a', 'colspan', $columns_count],
+		);
+		$self->_value($no_data_value);
+		$self->{'tags'}->put(
+			['e', 'td'],
 			['e', 'tr'],
 		);
 	}
@@ -145,6 +153,24 @@ sub _tags_a {
 	return;
 }
 
+sub _value {
+	my ($self, $value) = @_;
+
+	if (ref $value eq '') {
+		$self->{'tags'}->put(
+			['d', $value],
+		);
+	} elsif (ref $value eq 'ARRAY') {
+		$self->{'tags'}->put(@{$value});
+	} elsif (blessed($value) && $value->isa('Data::HTML::A')) {
+		$self->_tags_a($value);
+	} else {
+		err 'Bad value object.';
+	}
+
+	return;
+}
+
 1;
 
 __END__
@@ -162,7 +188,7 @@ Tags::HTML::Table::View - Tags helper for table view.
  use Tags::HTML::Table::View;
 
  my $obj = Tags::HTML::Table::View->new(%params);
- $obj->process($data_ar);
+ $obj->process($data_ar, $no_data_value);
  $obj->process_css;
 
 =head1 METHODS
@@ -205,9 +231,11 @@ Default value is undef.
 
 =head2 C<process>
 
- $obj->process($data_ar);
+ $obj->process($data_ar, $no_data_value);
 
 Process Tags structure for table view.
+Variable C<$no_data_value> contain information for situation when data in table not
+exists.
 
 Returns undef.
 
