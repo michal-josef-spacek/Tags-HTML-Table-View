@@ -402,7 +402,9 @@ Returns undef.
  );
 
  # Table data.
- my $table_data_ar = [];
+ my $table_data_ar = [
+         ['Country', 'Capital'],
+ ];
 
  # Process login button.
  $obj->init($table_data_ar, 'No data.');
@@ -436,9 +438,15 @@ Returns undef.
  # <body>
  #   <table class="table">
  #     <tr>
+ #       <th>
+ #         Country
+ #       </th>
+ #       <th>
+ #         Capital
+ #       </th>
  #     </tr>
  #     <tr>
- #       <td colspan="0">
+ #       <td colspan="2">
  #         No data.
  #       </td>
  #     </tr>
