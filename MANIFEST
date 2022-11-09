@@ -19,6 +19,11 @@ META.yml
 README
 t/Tags-HTML-Table-View/01-use.t
 t/Tags-HTML-Table-View/02-version.t
+t/Tags-HTML-Table-View/03-new.t
+t/Tags-HTML-Table-View/04-cleanup.t
+t/Tags-HTML-Table-View/05-init.t
+t/Tags-HTML-Table-View/06-process.t
+t/Tags-HTML-Table-View/07-process_css.t
 View.pm
 xt/Tags-HTML-Table-View/01-pod_coverage.t
 xt/Tags-HTML-Table-View/02-pod.t
