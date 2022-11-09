@@ -5,7 +5,9 @@ SYNOPSIS
      use Tags::HTML::Table::View;
 
      my $obj = Tags::HTML::Table::View->new(%params);
-     $obj->process($data_ar);
+     $obj->cleanup;
+     $obj->init($data_ar, $no_data_value);
+     $obj->process;
      $obj->process_css;
 
 METHODS
@@ -40,8 +42,24 @@ METHODS
 
             Default value is undef.
 
+  "cleanup"
+     $obj->cleanup;
+
+    Process cleanup after page run.
+
+    Returns undef.
+
+  "init"
+     $obj->init($data_ar, $no_data_value);
+
+    Process initialization before page run. Variable $data_ar are data for
+    table. Variable $no_data_value contain information for situation when
+    data in table not exists.
+
+    Returns undef.
+
   "process"
-     $obj->process($data_ar);
+     $obj->process;
 
     Process Tags structure for table view.
 
@@ -71,7 +89,7 @@ ERRORS
              From Tags::HTML::process_css():
                      Parameter 'css' isn't defined.
 
-EXAMPLE
+EXAMPLE1
      use strict;
      use warnings;
 
@@ -95,10 +113,12 @@ EXAMPLE
      ];
 
      # Process login button.
+     $obj->init($table_data_ar, 'No data.');
      $obj->process_css;
      $tags->put(['b', 'body']);
-     $obj->process($table_data_ar);
+     $obj->process;
      $tags->put(['e', 'body']);
+     $obj->cleanup;
 
      # Print out.
      print "CSS\n";
@@ -111,7 +131,7 @@ EXAMPLE
      # .table table, .table th, .table td {
      #         border: 1px solid black;
      # }
-     # 
+     #
      # HTML
      # <body>
      #   <table class="table">
@@ -137,6 +157,66 @@ EXAMPLE
      #       </td>
      #       <td>
      #         Moscow
+     #       </td>
+     #     </tr>
+     #   </table>
+     # </body>
+
+EXAMPLE2
+     use strict;
+     use warnings;
+
+     use CSS::Struct::Output::Indent;
+     use Tags::HTML::Table::View;
+     use Tags::Output::Indent;
+
+     # Object.
+     my $css = CSS::Struct::Output::Indent->new;
+     my $tags = Tags::Output::Indent->new;
+     my $obj = Tags::HTML::Table::View->new(
+             'css' => $css,
+             'tags' => $tags,
+     );
+
+     # Table data.
+     my $table_data_ar = [];
+
+     # Process login button.
+     $obj->init($table_data_ar, 'No data.');
+     $obj->process_css;
+     $tags->put(['b', 'body']);
+     $obj->process;
+     $tags->put(['e', 'body']);
+     $obj->cleanup;
+
+     # Print out.
+     print "CSS\n";
+     print $css->flush."\n\n";
+     print "HTML\n";
+     print $tags->flush."\n";
+
+     # Output:
+     # CSS
+     # table, td, th {
+     #         border: 1px solid #ddd;
+     #         text-align: left;
+     # }
+     # table {
+     #         border-collapse: collapse;
+     #         width: 100%;
+     # }
+     # th, td {
+     #         padding: 15px;
+     # }
+     #
+     # HTML
+     # <body>
+     #   <table class="table">
+     #     <tr>
+     #     </tr>
+     #     <tr>
+     #       <td colspan="0">
+     #         No data.
      #       </td>
      #     </tr>
      #   </table>

@@ -23,10 +23,12 @@ my $table_data_ar = [
 ];
 
 # Process login button.
+$obj->init($table_data_ar, 'No data.');
 $obj->process_css;
 $tags->put(['b', 'body']);
-$obj->process($table_data_ar, 'No data.');
+$obj->process;
 $tags->put(['e', 'body']);
+$obj->cleanup;
 
 # Print out.
 print "CSS\n";

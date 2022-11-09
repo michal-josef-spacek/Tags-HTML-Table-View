@@ -33,9 +33,31 @@ sub new {
 	return $self;
 }
 
+sub _cleanup {
+	my $self = shift;
+
+	delete $self->{'_data'};
+	delete $self->{'_no_data'};
+
+	return;
+}
+
+sub _init {
+	my ($self, $data_ar, $no_data_value) = @_;
+
+	if (exists $self->{'_data'}) {
+		return;
+	}
+
+	$self->{'_data'} = $data_ar;
+	$self->{'_no_data'} = $no_data_value;
+
+	return;
+}
+
 # Process 'Tags'.
 sub _process {
-	my ($self, $data_ar, $no_data_value) = @_;
+	my $self = shift;
 
 	# Main content.
 	$self->{'tags'}->put(
@@ -47,7 +69,7 @@ sub _process {
 		$self->{'tags'}->put(
 			['b', 'tr'],
 		);
-		my $header_ar = shift @{$data_ar};
+		my $header_ar = shift @{$self->{'_data'}};
 		foreach my $value (@{$header_ar}) {
 			$self->{'tags'}->put(
 				['b', 'th'],
@@ -62,7 +84,7 @@ sub _process {
 	} else {
 		$columns_count++;
 	}
-	foreach my $row_ar (@{$data_ar}) {
+	foreach my $row_ar (@{$self->{'_data'}}) {
 		$self->{'tags'}->put(
 			['b', 'tr'],
 		);
@@ -81,13 +103,13 @@ sub _process {
 	}
 
 	# No data row.
-	if (! @{$data_ar} && defined $no_data_value) {
+	if (! @{$self->{'_data'}} && defined $self->{'_no_data'}) {
 		$self->{'tags'}->put(
 			['b', 'tr'],
 			['b', 'td'],
 			['a', 'colspan', $columns_count],
 		);
-		$self->_value($no_data_value);
+		$self->_value($self->{'_no_data'});
 		$self->{'tags'}->put(
 			['e', 'td'],
 			['e', 'tr'],
@@ -188,7 +210,9 @@ Tags::HTML::Table::View - Tags helper for table view.
  use Tags::HTML::Table::View;
 
  my $obj = Tags::HTML::Table::View->new(%params);
- $obj->process($data_ar, $no_data_value);
+ $obj->cleanup;
+ $obj->init($data_ar, $no_data_value);
+ $obj->process;
  $obj->process_css;
 
 =head1 METHODS
@@ -229,13 +253,30 @@ Default value is undef.
 
 =back
 
-=head2 C<process>
+=head2 C<cleanup>
 
- $obj->process($data_ar, $no_data_value);
+ $obj->cleanup;
 
-Process Tags structure for table view.
+Process cleanup after page run.
+
+Returns undef.
+
+=head2 C<init>
+
+ $obj->init($data_ar, $no_data_value);
+
+Process initialization before page run.
+Variable C<$data_ar> are data for table.
 Variable C<$no_data_value> contain information for situation when data in table not
 exists.
+
+Returns undef.
+
+=head2 C<process>
+
+ $obj->process;
+
+Process Tags structure for table view.
 
 Returns undef.
 
@@ -292,10 +333,12 @@ Returns undef.
  ];
 
  # Process login button.
+ $obj->init($table_data_ar, 'No data.');
  $obj->process_css;
  $tags->put(['b', 'body']);
- $obj->process($table_data_ar, 'No data.');
+ $obj->process;
  $tags->put(['e', 'body']);
+ $obj->cleanup;
 
  # Print out.
  print "CSS\n";
@@ -362,10 +405,12 @@ Returns undef.
  my $table_data_ar = [];
 
  # Process login button.
+ $obj->init($table_data_ar, 'No data.');
  $obj->process_css;
  $tags->put(['b', 'body']);
- $obj->process($table_data_ar, 'No data.');
+ $obj->process;
  $tags->put(['e', 'body']);
+ $obj->cleanup;
 
  # Print out.
  print "CSS\n";
