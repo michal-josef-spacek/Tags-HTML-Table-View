@@ -35,4 +35,37 @@ print "HTML\n";
 print $tags->flush."\n";
 
 # Output:
-# TODO
+# CSS
+# .table table, .table th, .table td {
+#         border: 1px solid black;
+# }
+# 
+# HTML
+# <body>
+#   <table class="table">
+#     <tr>
+#       <th>
+#         Country
+#       </th>
+#       <th>
+#         Capital
+#       </th>
+#     </tr>
+#     <tr>
+#       <td>
+#         Czech Republic
+#       </td>
+#       <td>
+#         Prague
+#       </td>
+#     </tr>
+#     <tr>
+#       <td>
+#         Russia
+#       </td>
+#       <td>
+#         Moscow
+#       </td>
+#     </tr>
+#   </table>
+# </body>

@@ -1,5 +1,5 @@
 Changes
-examples/ex1.pl
+examples/print_table_with_data.pl
 inc/Module/Install.pm
 inc/Module/Install/AuthorRequires.pm
 inc/Module/Install/AuthorTests.pm

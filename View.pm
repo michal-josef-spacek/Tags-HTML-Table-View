@@ -267,6 +267,8 @@ Returns undef.
 
 =head1 EXAMPLE
 
+=for comment filename=print_table_with_data.pl
+
  use strict;
  use warnings;
 
