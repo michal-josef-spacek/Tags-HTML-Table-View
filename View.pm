@@ -265,7 +265,7 @@ Returns undef.
          From Tags::HTML::process_css():
                  Parameter 'css' isn't defined.
 
-=head1 EXAMPLE
+=head1 EXAMPLE1
 
 =for comment filename=print_table_with_data.pl
 
@@ -294,7 +294,7 @@ Returns undef.
  # Process login button.
  $obj->process_css;
  $tags->put(['b', 'body']);
- $obj->process($table_data_ar);
+ $obj->process($table_data_ar, 'No data.');
  $tags->put(['e', 'body']);
 
  # Print out.
@@ -308,7 +308,7 @@ Returns undef.
  # .table table, .table th, .table td {
  #         border: 1px solid black;
  # }
- # 
+ #
  # HTML
  # <body>
  #   <table class="table">
@@ -334,6 +334,67 @@ Returns undef.
  #       </td>
  #       <td>
  #         Moscow
+ #       </td>
+ #     </tr>
+ #   </table>
+ # </body>
+
+=head1 EXAMPLE2
+
+=for comment filename=print_table_without_data.pl
+
+ use strict;
+ use warnings;
+
+ use CSS::Struct::Output::Indent;
+ use Tags::HTML::Table::View;
+ use Tags::Output::Indent;
+
+ # Object.
+ my $css = CSS::Struct::Output::Indent->new;
+ my $tags = Tags::Output::Indent->new;
+ my $obj = Tags::HTML::Table::View->new(
+         'css' => $css,
+         'tags' => $tags,
+ );
+
+ # Table data.
+ my $table_data_ar = [];
+
+ # Process login button.
+ $obj->process_css;
+ $tags->put(['b', 'body']);
+ $obj->process($table_data_ar, 'No data.');
+ $tags->put(['e', 'body']);
+
+ # Print out.
+ print "CSS\n";
+ print $css->flush."\n\n";
+ print "HTML\n";
+ print $tags->flush."\n";
+
+ # Output:
+ # CSS
+ # table, td, th {
+ #         border: 1px solid #ddd;
+ #         text-align: left;
+ # }
+ # table {
+ #         border-collapse: collapse;
+ #         width: 100%;
+ # }
+ # th, td {
+ #         padding: 15px;
+ # }
+ #
+ # HTML
+ # <body>
+ #   <table class="table">
+ #     <tr>
+ #     </tr>
+ #     <tr>
+ #       <td colspan="0">
+ #         No data.
  #       </td>
  #     </tr>
  #   </table>
