@@ -266,7 +266,10 @@ Returns undef.
  $obj->init($data_ar, $no_data_value);
 
 Process initialization before page run.
-Variable C<$data_ar> are data for table.
+
+Variable C<$data_ar> are data for table. Each item in array could be scalar,
+array with scalars or L<Data::HTML::A> instance.
+
 Variable C<$no_data_value> contain information for situation when data in table not
 exists.
 

@@ -1,4 +1,5 @@
 0.02
+ - Improve init() method in doc.
  - In Tags processing returns without HTML code in case of undefined table
    data.
  - Regen README file.
