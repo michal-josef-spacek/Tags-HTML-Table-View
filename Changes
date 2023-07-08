@@ -1,5 +1,6 @@
 0.02
  - Regen README file.
+ - Remove check for existing data in init().
  - Update copyright years.
  - Update Module::Install to 1.21 version.
 

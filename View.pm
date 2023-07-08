@@ -45,10 +45,6 @@ sub _cleanup {
 sub _init {
 	my ($self, $data_ar, $no_data_value) = @_;
 
-	if (exists $self->{'_data'}) {
-		return;
-	}
-
 	$self->{'_data'} = $data_ar;
 	$self->{'_no_data'} = $no_data_value;
 
