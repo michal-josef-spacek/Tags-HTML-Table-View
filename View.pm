@@ -229,7 +229,7 @@ Returns instance of object.
 
 =item * C<css>
 
-'CSS::Struct::Output' object for L<process_css> processing.
+'L<CSS::Struct::Output>' object for L</process_css> processing.
 
 Default value is undef.
 
@@ -247,7 +247,7 @@ Default value is 1.
 
 =item * C<tags>
 
-'Tags::Output' object.
+'L<Tags::Output>' object for L</process> processing.
 
 Default value is undef.
 
@@ -279,7 +279,7 @@ Returns undef.
 
  $obj->process;
 
-Process Tags structure for table view.
+Process L<Tags> structure for table view.
 
 Returns undef.
 
@@ -287,7 +287,7 @@ Returns undef.
 
  $obj->process_css;
 
-Process CSS::Struct structure for output.
+Process L<CSS::Struct> structure for output.
 
 Returns undef.
 
