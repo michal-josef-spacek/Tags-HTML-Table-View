@@ -163,7 +163,7 @@ sub _tags_a {
 	);
 	if ($value->data_type eq 'plain') {
 		$self->{'tags'}->put(
-			['d', $value->data],
+			['d', @{$value->data}],
 		);
 	} elsif ($value->data_type eq 'tags') {
 		$self->{'tags'}->put($value->data);

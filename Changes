@@ -1,4 +1,5 @@
 0.03
+ - Fix processing of Data::HTML::A object in plain mode.
 
 0.02 2023-07-08T18:04:00+02:00
  - Implement 'css_table' parameter to CSS style.
