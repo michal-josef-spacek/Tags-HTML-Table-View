@@ -1,3 +1,5 @@
+0.03
+
 0.02 2023-07-08T18:04:00+02:00
  - Implement 'css_table' parameter to CSS style.
  - Improve init() method in doc.
