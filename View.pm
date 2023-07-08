@@ -55,6 +55,10 @@ sub _init {
 sub _process {
 	my $self = shift;
 
+	if (! exists $self->{'_data'}) {
+		return;
+	}
+
 	# Main content.
 	$self->{'tags'}->put(
 		['b', 'table'],

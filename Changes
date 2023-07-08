@@ -1,4 +1,6 @@
 0.02
+ - In Tags processing returns without HTML code in case of undefined table
+   data.
  - Regen README file.
  - Remove check for existing data in init().
  - Update copyright years.
