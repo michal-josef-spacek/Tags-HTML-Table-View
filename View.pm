@@ -128,20 +128,20 @@ sub _process_css {
 	my $self = shift;
 
 	$self->{'css'}->put(
-		['s', 'table'],
-		['s', 'td'],
-		['s', 'th'],
+		['s', '.'.$self->{'css_table'}],
+		['s', '.'.$self->{'css_table'}.' td'],
+		['s', '.'.$self->{'css_table'}.' th'],
 		['d', 'border', '1px solid #ddd'],
 		['d', 'text-align', 'left'],
 		['e'],
 
-		['s', 'table'],
+		['s', '.'.$self->{'css_table'}],
 		['d', 'border-collapse', 'collapse'],
 		['d', 'width', '100%'],
 		['e'],
 
-		['s', 'th'],
-		['s', 'td'],
+		['s', '.'.$self->{'css_table'}.' th'],
+		['s', '.'.$self->{'css_table'}.' td'],
 		['d', 'padding', '15px'],
 		['e'],
 	);
@@ -351,8 +351,16 @@ Returns undef.
 
  # Output:
  # CSS
- # .table table, .table th, .table td {
- #         border: 1px solid black;
+ # .table, .table td, .table th {
+ #         border: 1px solid #ddd;
+ #         text-align: left;
+ # }
+ # .table {
+ #         border-collapse: collapse;
+ #         width: 100%;
+ # }
+ # .table th, .table td {
+ #         padding: 15px;
  # }
  #
  # HTML
@@ -425,15 +433,15 @@ Returns undef.
 
  # Output:
  # CSS
- # table, td, th {
+ # .table, .table td, .table th {
  #         border: 1px solid #ddd;
  #         text-align: left;
  # }
- # table {
+ # .table {
  #         border-collapse: collapse;
  #         width: 100%;
  # }
- # th, td {
+ # .table th, .table td {
  #         padding: 15px;
  # }
  #
