@@ -1,4 +1,4 @@
-0.03
+0.03 2023-07-09T02:08:36+02:00
  - Add example with usage of Data::HTML::A to doc.
  - Add tests.
  - Fix processing of Data::HTML::A object in plain mode.
