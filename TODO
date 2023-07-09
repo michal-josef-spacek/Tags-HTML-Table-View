@@ -1,6 +1,5 @@
 TODO
 ====
-2. Second example with tags data (Data::HTML::A).
 5. When header => 1 and no title data, there is bad output.
 6. Add title before table?
 7. Add integration tests for Data::HTML::A
@@ -17,3 +16,6 @@ OK [20221109] skim
 
 4. Add CSS class variable to CSS
 OK [20230708] skim
+
+2. Second example with tags data (Data::HTML::A).
+OK [20230709] skim

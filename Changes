@@ -1,4 +1,5 @@
 0.03
+ - Add example with usage of Data::HTML::A to doc.
  - Add tests.
  - Fix processing of Data::HTML::A object in plain mode.
  - Improve links in doc.
