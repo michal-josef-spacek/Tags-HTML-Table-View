@@ -2,7 +2,7 @@ TODO
 ====
 5. When header => 1 and no title data, there is bad output.
 6. Add title before table?
-7. Add integration tests for Data::HTML::A
+7. Add integration tests for Data::HTML::Element::A
 8. Support for stripped rows.
 9.
 

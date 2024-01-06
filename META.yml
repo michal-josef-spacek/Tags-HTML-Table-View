@@ -31,6 +31,7 @@ requires:
   Error::Pure: 0
   List::MoreUtils: 0
   Tags::HTML: 0.06
+  Tags::HTML::Element::A: 0
   perl: 5.8.0
 resources:
   bugtracker: https://github.com/michal-josef-spacek/Tags-HTML-Table-View/issues

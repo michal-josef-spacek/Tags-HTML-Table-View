@@ -22,6 +22,7 @@ requires 'Class::Utils' => 0;
 requires 'Error::Pure' => 0;
 requires 'List::MoreUtils' => 0;
 requires 'Tags::HTML' => 0.06;
+requires 'Tags::HTML::Element::A' => 0;
 resources 'bugtracker' => 'https://github.com/michal-josef-spacek/Tags-HTML-Table-View/issues';
 resources 'homepage' => 'https://github.com/michal-josef-spacek/Tags-HTML-Table-View';
 resources 'repository' => 'git://github.com/michal-josef-spacek/Tags-HTML-Table-View';
