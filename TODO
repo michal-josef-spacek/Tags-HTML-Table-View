@@ -4,7 +4,8 @@ TODO
 6. Add title before table?
 7. Add integration tests for Data::HTML::Element::A
 8. Support for stripped rows.
-9.
+9. Check of header field value?
+10.
 
 Applied
 =======
