@@ -6,7 +6,7 @@ use Error::Pure::Utils qw(clean);
 use Tags::HTML::Table::View;
 use Tags::Output::Structure;
 use Test::MockObject;
-use Test::More 'tests' => 11;
+use Test::More 'tests' => 13;
 use Test::NoWarnings;
 
 # Test.
@@ -155,6 +155,45 @@ is_deeply(
 		['e', 'table'],
 	],
 	'Tags code for table with data (data are in Tags format).',
+);
+
+# Test.
+$tags = Tags::Output::Structure->new;
+$obj = Tags::HTML::Table::View->new(
+	'header' => 0,
+	'tags' => $tags,
+);
+$obj->init([
+	[
+		'Data col #1',
+		sub {
+			my $self = shift;
+			$self->{'tags'}->put(
+				['d', 'Data col #2'],
+			);
+			return;
+		},
+	],
+], 'No data.');
+$ret = $obj->process;
+is($ret, undef, 'process() returns undef.');
+$ret_ar = $tags->flush(1);
+is_deeply(
+	$ret_ar,
+	[
+		['b', 'table'],
+		['a', 'class', 'table'],
+		['b', 'tr'],
+		['b', 'td'],
+		['d', 'Data col #1'],
+		['e', 'td'],
+		['b', 'td'],
+		['d', 'Data col #2'],
+		['e', 'td'],
+		['e', 'tr'],
+		['e', 'table'],
+	],
+	'Tags code for table with data (data in callback).',
 );
 
 # Test.

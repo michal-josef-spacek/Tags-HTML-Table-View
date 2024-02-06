@@ -190,6 +190,8 @@ sub _value {
 		);
 	} elsif (ref $value eq 'ARRAY') {
 		$self->{'tags'}->put(@{$value});
+	} elsif (ref $value eq 'CODE') {
+		$value->($self);
 	} elsif (blessed($value) && $value->isa('Data::HTML::Element::A')) {
 		$self->{'_tags_html_a'}->init($value);
 		$self->{'_tags_html_a'}->process;
@@ -274,8 +276,27 @@ Returns undef.
 
 Process initialization before page run.
 
-Variable C<$data_ar> are data for table. Each item in array could be scalar,
-array with scalars or L<Data::HTML::Element::A> instance.
+Variable C<$data_ar> are data for table. Each item in array could be:
+
+=over
+
+=item * Scalar
+
+Add scalar variable to field.
+
+=item * Array with scalars
+
+Add scalar variables to field.
+
+=item * Code
+
+Run this code with argument C<$self> of this module.
+
+=item * L<Data::HTML::Element::A> instance
+
+Serialize link to field.
+
+=back
 
 Variable C<$no_data_value> contain information for situation when data in table not
 exists.
