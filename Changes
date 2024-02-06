@@ -1,5 +1,6 @@
 0.05
  - Add possibility of code in table field.
+ - Add test for Data::HTML::Element::A in field.
 
 0.04 2024-01-06T19:41:58+01:00
  - Rewrite from Data::HTML::A to Data::HTML::Element::A.
