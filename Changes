@@ -1,4 +1,4 @@
-0.05
+0.05 2024-02-06T09:36:10+01:00
  - Add possibility of code in table field.
  - Add test for Data::HTML::Element::A in field.
 
