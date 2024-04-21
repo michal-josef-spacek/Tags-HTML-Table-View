@@ -10,7 +10,7 @@ use List::MoreUtils qw(none);
 use Scalar::Util qw(blessed);
 use Tags::HTML::Element::A;
 
-our $VERSION = 0.06;
+our $VERSION = 0.07;
 
 # Constructor.
 sub new {
@@ -609,6 +609,6 @@ BSD 2-Clause License
 
 =head1 VERSION
 
-0.06
+0.07
 
 =cut
