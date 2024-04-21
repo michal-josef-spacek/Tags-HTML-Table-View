@@ -47,7 +47,7 @@ sub _cleanup {
 sub _init {
 	my ($self, $data_ar, $no_data_value) = @_;
 
-	$self->{'_data'} = $data_ar;
+	$self->{'_data'} = [@{$data_ar}];
 	$self->{'_no_data'} = $no_data_value;
 	$self->{'_tags_html_a'} = Tags::HTML::Element::A->new(
 		'css' => $self->{'css'},
