@@ -155,32 +155,6 @@ sub _process_css {
 	return;
 }
 
-sub _tags_a {
-	my ($self, $value) = @_;
-
-	$self->{'tags'}->put(
-		['b', 'a'],
-		defined $value->css_class ? (
-			['a', 'class', $value->css_class],
-		) : (),
-		defined $value->url ? (
-			['a', 'href', $value->url],
-		) : (),
-	);
-	if ($value->data_type eq 'plain') {
-		$self->{'tags'}->put(
-			['d', @{$value->data}],
-		);
-	} elsif ($value->data_type eq 'tags') {
-		$self->{'tags'}->put($value->data);
-	}
-	$self->{'tags'}->put(
-		['e', 'a'],
-	);
-
-	return;
-}
-
 sub _value {
 	my ($self, $value) = @_;
 
