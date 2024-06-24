@@ -563,7 +563,8 @@ L<Class::Utils>,
 L<Error::Pure>,
 L<List::Util>,
 L<Scalar::Util>,
-L<Tags::HTML>.
+L<Tags::HTML>,
+L<Tags::HTML::Element::A>.
 
 =head1 REPOSITORY
 
